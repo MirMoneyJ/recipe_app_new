@@ -42,7 +42,7 @@ function Cuisine() {
 const Grid = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  grid-gap: 3rem;
+  grid-gap: 2.5rem;
 `;
 
 const Card = styled.div`
