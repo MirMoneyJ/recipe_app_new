@@ -1,4 +1,3 @@
-// imports react library
 import Pages from './pages/Pages'
 import Category from './components/Category';
 import {BrowserRouter} from 'react-router-dom'
@@ -13,7 +12,7 @@ function App() {
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Nav>
           <GiKnifeFork/>
-          <Logo to={'/'}>Page Title</Logo>
+          <Logo to={'/'}>Recipe Realm</Logo>
         </Nav>
         <Search/>
         <Category/>
@@ -26,6 +25,7 @@ function App() {
 const Logo = styled(Link)`
   text-decoration: none;
   font-size: 2rem;
+  font-family: 'Lobster Two', cursive;
 `
 const Nav = styled.h1`
   padding: 4rem 0rem;

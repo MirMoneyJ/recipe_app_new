@@ -32,9 +32,9 @@ useEffect(()=>{
       <Wrapper>
         <h3>Vegetarian Picks</h3>
         <Splide options={{
-          perPage: 3,
+          perPage: 4,
           drag: 'free',
-          gap: '4rem',
+          gap: '3rem',
         }}>
         {veggie.map((recipe)=>{
           return (

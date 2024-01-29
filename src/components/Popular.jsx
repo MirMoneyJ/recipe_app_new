@@ -31,9 +31,9 @@ function Popular() {
       <Wrapper>
         <h3>Popular Picks</h3>
         <Splide options={{
-          perPage: 4,
+          perPage: 3,
           drag: 'free',
-          gap: '3rem',
+          gap: '4rem',
         }}>
         {popular.map((recipe)=>{
           return (
