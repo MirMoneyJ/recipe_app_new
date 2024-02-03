@@ -1,7 +1,7 @@
 How to run
 1. open terminal
 2. type 'cd recipe_app' 
-2. type 'npm start' (*check the directory : ...\recipe_app\recipe_app)
+2. type 'npm start' (*check the directory : ..\recipe_app\recipe_app)
 
 ### 2024/01/28 Update
 
