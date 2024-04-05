@@ -15,6 +15,8 @@ function App() {
           <Logo to={'/'}>Recipe Realm</Logo>
         </Nav>
         <Search/>
+        <Link to="/family-cookbook" style={{ marginLeft: '20px', textDecoration: 'none', color: 'grey' }}>Family Cookbook</Link>
+        
         <Category/>
         <Pages/>
       </BrowserRouter>
