@@ -19,10 +19,12 @@ function FamilyCookbook() {
     fetchRecipes();
   }, []);
 
+  // Delete a recipe
   const removeRecipe = async (recipeId) => {
     const updatedRecipes = recipes.filter(recipe => recipe.id !== recipeId);
     setRecipes(updatedRecipes);
 
+    //Connection to JSONBin
     try {
       const putResponse = await fetch('https://api.jsonbin.io/v3/b/660c85aae41b4d34e4de2620', {
         method: 'PUT',
@@ -45,8 +47,8 @@ function FamilyCookbook() {
     <div>
       <h2>Family Cookbook</h2>
       <ul>
-        {recipes.map(recipe => (
-          <RecipeItem key={recipe.id}>
+        {recipes.map((recipe, index) => (
+          <RecipeItem key={recipe.id > 0 ? recipe.id : `recipe-${index}`}>
             <Link to={`/recipe/${recipe.id}`}>{recipe.title}</Link>
             <DeleteButton onClick={() => removeRecipe(recipe.id)}>✕</DeleteButton>
           </RecipeItem>
