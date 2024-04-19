@@ -1,52 +1,22 @@
-How to run
-1. open terminal
-2. type 'cd recipe_app' 
-2. type 'npm start' (*check the directory : ..\recipe_app\recipe_app)
+RecipeRealm
 
-### 2024/01/28 Update
+Overview: This project is designed to manage, display, and interact with a collection of recipes. It aims to provide an easy-to-use interface for users to browse, search, and contribute recipes.
 
-'.env' file is an API key. (The custom environment variable should be named start with 'REACT_APP_')
+Features:
 
-*************npm library list**************
-npm install [library name(below)]
-    framer-motion //for animation
-    react-icons 
-    react-router-dom
-    styled-components
-    '@splidejs/react-splide' //for carousel
+Recipe Management: Add, edit, and delete recipes.
+Search Functionality: Easily find recipes based on ingredients, cuisine, or other criteria.
+User Contributions: Users can submit their own recipes to the collection.
+Project Structure:
 
-
-***************Card Format*****************
-return (
-    <div>
-      {popular.map(recipe => {
-        return(
-          <Wrapper> 
-            <h3>Popular Picks</h3>
-            {popular.map((recipe)=>{
-              return (
-                <Card> 
-                  <p>{recipe.title}</p>
-                  <img src={recipe.image} alt={recipe.title}></img>
-                </Card>
-              )
-            })}
-          </Wrapper>
-        );
-      })}
-    </div>
-  )
-
-const Wrapper = styled.div`
-  margin: 4rem 0rem;
-`
-
-const Card = styled.div`
-  min-height: 25rem;
-  border-radius: 2rem;
-  overflow: hidden;
-
-  img{
-    border-radius: 2rem;
-  }
-`
+JSON: Grabs the JSON objects from the Spoonacular API and saves them into a JSON file
+key.env: Environment variables which holds the API key
+logs: Directory for log files. Specifcally for login/register authentication.
+models: Data model which holds the User schema.
+public: Folder for the HTML files.
+.gitignore: Files to ignore when pushing to Git.
+README.md: This documentation file.
+routes: Routing logic for web application.
+scripts: Script logic for web application.
+static: Where the main server lives.
+styles: CSS stylesheets for the project.
