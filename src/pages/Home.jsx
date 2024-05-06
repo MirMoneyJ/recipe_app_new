@@ -1,9 +1,9 @@
 import Veggie from '../components/Veggie';
 import Popular from '../components/Popular';
 import {motion} from 'framer-motion'
-
 import React from 'react'
 
+// Animation container and renders respective components
 function Home() {
   return (
     <motion.div
