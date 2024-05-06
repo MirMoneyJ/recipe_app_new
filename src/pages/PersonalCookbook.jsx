@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function PersonalCookbook({ userName }) {
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState([]); // State to hold list of recipes
   const [modifiedRecipe, setModifiedRecipe] = useState(null); // Store the recipe being modified
+  // State to store new ingredients being appended
   const [newIngredient, setNewIngredient] = useState({
     id: Math.random(), // generate a UID
     consistency: "SOLID",
@@ -12,6 +13,7 @@ function PersonalCookbook({ userName }) {
     amount: 1,
   });
 
+  // Fetch recipes from JSONBin 
   useEffect(() => {
     const fetchRecipes = async () => {
       const response = await fetch('https://api.jsonbin.io/v3/b/66205154ad19ca34f85bd7c2', {
@@ -19,7 +21,9 @@ function PersonalCookbook({ userName }) {
       });
       if (response.ok) {
         const data = await response.json();
+        // Ensure data is an array
         if (Array.isArray(data.record)) {
+          // Format recipes to ensure each recipe has an ingredients array even if empty
           const formattedRecipes = data.record.map(recipe => ({
             ...recipe,
             // Ensure each recipe has an ingredients array even if it's empty
@@ -60,6 +64,7 @@ function PersonalCookbook({ userName }) {
     setModifiedRecipe({ ...modifiedRecipe, ingredients: updatedIngredients });
   };
 
+  // Add a new ingredient to the modified recipe
   const addNewIngredient = () => {
     if (!modifiedRecipe || !newIngredient.name.trim()) return; // Check if the new ingredient name is not empty
   
