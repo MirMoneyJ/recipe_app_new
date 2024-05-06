@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function FamilyCookbook() {
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState([]); // State to hold list of recipes
 
+  // Fetch recipes from JSONBin
   useEffect(() => {
     const fetchRecipes = async () => {
       const response = await fetch('https://api.jsonbin.io/v3/b/660c85aae41b4d34e4de2620', {
@@ -24,7 +25,7 @@ function FamilyCookbook() {
     const updatedRecipes = recipes.filter(recipe => recipe.id !== recipeId);
     setRecipes(updatedRecipes);
 
-    //Connection to JSONBin
+    // Update recipes on JSONBin
     try {
       const putResponse = await fetch('https://api.jsonbin.io/v3/b/660c85aae41b4d34e4de2620', {
         method: 'PUT',
@@ -35,6 +36,7 @@ function FamilyCookbook() {
         body: JSON.stringify(updatedRecipes),
       });
 
+      // Error handling
       if (!putResponse.ok) {
         throw new Error('Failed to delete the recipe.');
       }
