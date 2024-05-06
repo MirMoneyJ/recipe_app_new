@@ -3,17 +3,20 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 function Recipe({ userName }) {
-  let params = useParams();
+  let params = useParams(); // Fetch route params
+  // States to manage various data
   const [details, setDetails] = useState({});
   const [activeTab, setActiveTab] = useState('Instructions');
   const [editedIngredients, setEditedIngredients] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  // Function to fetch recipe details from the API
   const fetchDetails = useCallback(async () => {
     setIsLoading(true);
     try {
       const response = await fetch(`https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`);
       const detailData = await response.json();
+      // Filter duplicate UID's
       if (detailData && Array.isArray(detailData.extendedIngredients)) {
         const uniqueIngredients = [];
         const ingredientIds = new Set();
@@ -23,6 +26,7 @@ function Recipe({ userName }) {
             uniqueIngredients.push(ingredient);
           }
         });
+        // Set the state with unique ingredients and recipe details
         setEditedIngredients(uniqueIngredients);
         setDetails(detailData);
       } else {
@@ -36,9 +40,11 @@ function Recipe({ userName }) {
     }
 }, [params.name]);
 
+  // Function to save recipe details
   const handleSaveRecipe = async (modify = false) => {
     setIsLoading(true);
     try {
+      // Determine the URL based on whether it's a personal or regular save
       const url = modify ? 'https://api.jsonbin.io/v3/b/66205154ad19ca34f85bd7c2' // Personal Cookbook bin
                          : 'https://api.jsonbin.io/v3/b/660c85aae41b4d34e4de2620'; // Family Cookbook bin
       
@@ -46,7 +52,8 @@ function Recipe({ userName }) {
         'Content-Type': 'application/json',
         'X-Master-Key': '$2a$10$pgcUy1BSS91nEfEZDFUYAOkv.jLnPaFmqyc4UIYfJCuKceurtGYYm',
       };
-  
+
+      // Fetch existing recipes
       const getResponse = await fetch(url, { headers });
       if (!getResponse.ok) {
         throw new Error(`Failed to fetch existing recipes: ${getResponse.statusText}`);
@@ -54,20 +61,24 @@ function Recipe({ userName }) {
       const jsonData = await getResponse.json();
       let existingRecipes = jsonData.record || [];
 
+      // If existing recipe is not an array, throw error
       if (!Array.isArray(existingRecipes)) {
         console.error('Expected an array of recipes, but received:', existingRecipes);
         existingRecipes = [];
       }
 
+      // Prepare the new recipe details
       const newDetails = {
         ...details,
         extendedIngredients: editedIngredients,
         title: modify ? `${details.title} (${userName} modified)` : details.title,
       };
 
+      // Update exisitn existing recipes array
       const updatedRecipes = existingRecipes.filter(recipe => recipe.id !== details.id);
       updatedRecipes.push(newDetails);
 
+      // PUT req. to update the recipes
       const putResponse = await fetch(url, {
         method: 'PUT',
         headers,
