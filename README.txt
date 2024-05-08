@@ -20,3 +20,18 @@ routes: Routing logic for web application.
 scripts: Script logic for web application.
 static: Where the main server lives.
 styles: CSS stylesheets for the project.
+----------------------------------------------------------------------------------------------------------------------------
+How to run
+
+1. Download required libraries
+npm install [library name(below)]
+    framer-motion 
+    react-icons 
+    react-router-dom
+    styled-components
+    '@splidejs/react-splide' 
+2. open terminal
+3. type 'cd recipe_app' 
+4. type 'npm start' (*check the directory : ..\recipe_app\recipe_app)
+
+
